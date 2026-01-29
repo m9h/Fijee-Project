@@ -7,7 +7,13 @@ project( Fijee CXX C )
 
 #
 # Minimal version of CMake:
-cmake_minimum_required( VERSION 2.6.0 )
+# Minimal version of CMake:
+cmake_minimum_required( VERSION 3.16 )
+
+# Enforce C++17 Standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 #
 # Some best practice versioning and soversioning for now
@@ -93,25 +99,23 @@ find_package( PkgConfig REQUIRED)
 
 
 #
-# FEniCS
-find_package(DOLFIN REQUIRED CONFIG)
-if(DOLFIN_FOUND)
-  message( STATUS "FEniCS found ${DOLFIN_INCLUDE_DIRS}" )
-  include(${DOLFIN_USE_FILE})
-  get_filename_component( DOLFIN_LIBRARY_DIRS ${DOLFIN_LIBRARIES} PATH )
-  else()
-  message( STATUS "FEniCS not found" )    
+# FEniCSx
+find_package(DOLFINX REQUIRED)
+if(DOLFINX_FOUND)
+  message( STATUS "FEniCSx found" )
+  # Modern dolfinx uses targets, so we don't include a USE_FILE
+  # We will need to link against dolfinx::dolfinx later
+else()
+  message( STATUS "FEniCSx not found" )    
 endif()
 
 #
 # VTK
-find_package(VTK 6 NO_MODULE)
-if(NOT VTK_FOUND)
-  find_package(VTK 5.10 REQUIRED NO_MODULE)
-endif()
+find_package(VTK 9 REQUIRED)
 if(VTK_FOUND)
   message(STATUS "VTK found ${VTK_DIR}")
-  include(${VTK_USE_FILE})
+  # VTK 9 also uses targets/modules but might still provide USE_FILE compatibility or we rely on explicit linking
+  # include(${VTK_USE_FILE}) # specific to older VTK
 else()
   message(STATUS "VTK not found")
 endif()
@@ -141,7 +145,7 @@ endif()
 find_package(Eigen3 REQUIRED)
 if(EIGEN3_FOUND)
   message(STATUS "eigen found ${EIGEN_DIR} ${EIGEN_INCLUDE_DIR}")
-#  include_directories(${EIGEN3_INCLUDE_DIR})
+  include_directories(${EIGEN3_INCLUDE_DIR})
 #  include( ${EIGEN3_USE_FILE} ) 
 else()
    message(STATUS "eigen not found")

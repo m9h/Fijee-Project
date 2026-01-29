@@ -1,16 +1,7 @@
-# Compiled Object files
-*.slo
-*.lo
+build/
+*.log
 *.o
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-
-# Compiled Static libraries
-*.lai
-*.la
 *.a
-
-#Temporary editor (emacs) files
+*.so
 *~
+.DS_Store

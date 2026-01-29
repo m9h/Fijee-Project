@@ -41,12 +41,12 @@ include_directories( ${Fijee_SOURCE_DIR}  ${Fijee_SOURCE_DIR}/Fijee ${CMAKE_CURR
 # Add CXX definitions
 add_definitions( ${Fijee_CXX_DEFINITIONS} )
 # Add flags
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${DOLFIN_CXX_FLAGS}" )
+# set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${DOLFIN_CXX_FLAGS}" )
 set( CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${Fijee_LINK_FLAGS}" )
 # Define libraries
 add_library( FijeeFEM ${Fijee_H} ${HEADERS} ${UFL_HEADERS} ${SOURCES} )
 #add_dependencies( FijeeFEM ufl_processing )
 # Add FijeeUtils target libraries
-target_link_libraries( FijeeFEM ${Fijee_TARGET_LINK_LIBRARIES} ${DOLFIN_LIBRARIES} )
+target_link_libraries( FijeeFEM ${Fijee_TARGET_LINK_LIBRARIES} dolfinx )
 # Install
 install( TARGETS FijeeFEM EXPORT FijeeTargets LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib )

@@ -18,7 +18,7 @@ include_directories( ${Fijee_SOURCE_DIR}  ${Fijee_SOURCE_DIR}/Fijee )
 # Add CXX definitions
 add_definitions( ${Fijee_CXX_DEFINITIONS} )
 # Add flags
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${DOLFIN_CXX_FLAGS}" )
+# set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${DOLFIN_CXX_FLAGS}" )
 set( CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${Fijee_LINK_FLAGS}" )
 # Define libraries
 add_library( FijeeBiophysics ${Fijee_H} ${HEADERS} ${SOURCES} )

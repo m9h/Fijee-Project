@@ -61,6 +61,7 @@ namespace Domains
   {
   public:
     typedef Point_vector Query_item;
+    typedef Point_vector Point_d; // Required by modern CGAL
     typedef float FT;
 //    typedef CGAL::Dynamic_dimension_tag D;
     typedef CGAL::Dimension_tag<3> D;
